@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'First app with Flutter'),
     );
   }
 } 
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _questionIndex=0;
   var _questions=[
     'Cuál es tu color favorito?',
-    'Cuál es tu animal favorito?',
+    'Cuál es tu animal favorito?  ',
     ];
   void _incrementIndex() {
     setState(() {

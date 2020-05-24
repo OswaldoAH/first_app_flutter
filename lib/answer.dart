@@ -5,15 +5,12 @@ class Answer extends StatelessWidget {
   String answerText;
   Color colorButton;
   Color colorText;
-  Answer(
-    {
-      this.answerText='Default',
-      this.colorButton=Colors.white38,
-      this.colorText=Colors.black,
-      this.selectHandler,
-    }
-  );
-
+  Answer({
+    this.answerText = 'Default',
+    this.colorButton = Colors.white38,
+    this.colorText = Colors.black,
+    this.selectHandler,
+  });
 
   @override
   Widget build(BuildContext context) {

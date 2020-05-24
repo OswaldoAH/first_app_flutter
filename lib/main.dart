@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -35,25 +36,22 @@ class _MyHomePageState extends State<MyHomePage> {
   var _questions = [
     {
       'Pregunta': 'Cuál es tu color favorito?',
-      'Respuestas': ['Rojo','Negro','Blanco','Azul']
+      'Respuestas': ['Rojo', 'Negro', 'Blanco', 'Azul']
     },
     {
       'Pregunta': 'Cuál es tu Animal favorito?',
-      'Respuestas': ['Conejo','Gato','Perro','Loro']
+      'Respuestas': ['Conejo', 'Gato', 'Perro', 'Loro']
     },
     {
       'Pregunta': 'Cuál es tu lenguaje de programación favorito?',
-      'Respuestas': ['Java','Ruby','Python','Dart']
+      'Respuestas': ['Java', 'Ruby', 'Python', 'Dart']
     }
   ];
   void _incrementIndex() {
     setState(() {
-      if (_questionIndex != _questions.length - 1) {
-        _questionIndex++;
-      }
+      _questionIndex++;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -61,23 +59,19 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        children: <Widget>[
-          Question(
-            _questions[_questionIndex]['Pregunta'],
-          ),
-          ...(_questions[_questionIndex]['Respuestas'] as List<String>)
-          .map((respuesta) {
-            return Answer(
-              answerText: respuesta,
-              colorButton: Colors.black,
-              colorText: Colors.white,
-              selectHandler: _incrementIndex,
-            );
-          }).toList()
-          //Answer('Siguiente',Colors.white),
-        ],
-      ),
+      body: (_questionIndex < _questions.length)
+          ? 
+            Column(
+              children: <Widget>[
+                Quiz(
+                  incrementIndex: _incrementIndex,
+                  questionIndex: _questionIndex,
+                  questions: _questions,
+                )
+              ],
+            )
+          :
+            Result(), 
     );
   }
 }

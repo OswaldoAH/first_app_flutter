@@ -20,13 +20,13 @@ class Quiz extends StatelessWidget {
         Question(
           questions[questionIndex]['Pregunta'],
         ),
-        ...(questions[questionIndex]['Respuestas'] as List<String>)
+        ...(questions[questionIndex]['Respuestas'] as List<Map<String, Object>>)
             .map((respuesta) {
           return Answer(
-            answerText: respuesta,
-            colorButton: Colors.black,
+            answerText: respuesta['eleccion'],
+            colorButton: Colors.indigo,
             colorText: Colors.white,
-            selectHandler: incrementIndex,
+            selectHandler: () => incrementIndex(respuesta['Punteo']),
           );
         }).toList(),
       ],

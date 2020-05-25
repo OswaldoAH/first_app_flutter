@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import './quiz.dart';
 import './result.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -36,20 +35,43 @@ class _MyHomePageState extends State<MyHomePage> {
   var _questions = [
     {
       'Pregunta': 'Cuál es tu color favorito?',
-      'Respuestas': ['Rojo', 'Negro', 'Blanco', 'Azul']
+      'Respuestas': [
+        {'eleccion': 'Rojo', 'Punteo': 10},
+        {'eleccion': 'Negro', 'Punteo': 7},
+        {'eleccion': 'Blanco', 'Punteo': 5},
+        {'eleccion': 'Azul', 'Punteo': 10}
+      ]
     },
     {
       'Pregunta': 'Cuál es tu Animal favorito?',
-      'Respuestas': ['Conejo', 'Gato', 'Perro', 'Loro']
+      'Respuestas': [
+        {'eleccion': 'Conejo', 'Punteo': 10},
+        {'eleccion': 'Gato', 'Punteo': 12},
+        {'eleccion': 'Perro', 'Punteo': 15},
+        {'eleccion': 'Loro', 'Punteo': 8}
+      ]
     },
     {
       'Pregunta': 'Cuál es tu lenguaje de programación favorito?',
-      'Respuestas': ['Java', 'Ruby', 'Python', 'Dart']
+      'Respuestas': [
+        {'eleccion': 'Java', 'Punteo': 10},
+        {'eleccion': 'Ruby', 'Punteo': 8},
+        {'eleccion': 'Python', 'Punteo': 8},
+        {'eleccion': 'Dart', 'Punteo': 10}
+      ]
     }
   ];
-  void _incrementIndex() {
+  int _punteoTotal=0;
+  void _incrementIndex(int punteo) {
+    _punteoTotal+=punteo;
     setState(() {
       _questionIndex++;
+    });
+  }
+  void _reiniciar() {
+    setState(() {
+      _punteoTotal=0;
+      _questionIndex=0;
     });
   }
 
@@ -60,8 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: (_questionIndex < _questions.length)
-          ? 
-            Column(
+          ? Column(
               children: <Widget>[
                 Quiz(
                   incrementIndex: _incrementIndex,
@@ -70,8 +91,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
               ],
             )
-          :
-            Result(), 
+          : Result(
+            total: _punteoTotal,
+            reiniciar: _reiniciar,
+          ),
     );
   }
 }
